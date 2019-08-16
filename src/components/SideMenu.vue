@@ -1,13 +1,13 @@
 <template>
     <div class="side-page">
         <div class="side-menu">
-            <div class="avatar">
+            <div class="avatar" @click="goToProfilePage">
                 <figure class="image">
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHzJVsbKd6gzFxVwuabXhLvW5BnmMdvjW3TLlZD09-8Lb4CTuo'>
+                    <img :src="currentUserProfileFromDB.avatar">
                 </figure>
-                <p class="subtitle is-3">John Smith</p>
+                <p class="subtitle is-3">{{currentUserProfileFromDB.name}}</p>
                 <a class="subtitle is-6">EDIT PROFILE</a> 
-                {{currentRoute}}
+                <!-- {{currentRoute}} -->
             </div>
             <div class="menu-list">
                 <div class="menu-item" :class="{ 'highlight': $route.path == '/friends' }" @click="goToFriendsPage">
@@ -52,6 +52,14 @@ export default {
         currentRoute() {
             // return this.$route.path
             console.log( this.$route.path)
+        },
+        currentUserProfileFromDB() {
+            // if(JSON.parse(localStorage.getItem('currentUser')).uid)
+            if(this.$store.getters.currentUserProfileFromDB){
+                return this.$store.getters.currentUserProfileFromDB
+            }
+            this.$store.dispatch('fetchCurrentUserProfileById', JSON.parse(localStorage.getItem('currentUser')).uid)
+            
         }
     },
     methods: {
@@ -69,6 +77,9 @@ export default {
         },
         goToMatchPage(){
             this.$router.push('/match')
+        },
+        goToProfilePage(){
+            this.$router.push('/profile')
         }
     },
 }

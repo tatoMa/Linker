@@ -78,6 +78,16 @@ const router = new Router({
         import(/* webpackChunkName: "Setting" */ './views/Setting.vue')
     },
     {
+      path: '/profile',
+      name: 'Profile',
+      meta: { transitionName: 'none', requiresAuth: true },
+      // route level code-splitting
+      // this generates a separate chunk (Profile.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "Profile" */ './views/Profile.vue')
+    },
+    {
       path: '/match',
       name: 'Match',
       meta: { transitionName: 'none', requiresAuth: true },

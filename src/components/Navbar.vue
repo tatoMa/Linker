@@ -6,18 +6,26 @@
     <span>
       {{title}}
     </span>
-    <span class="unread-messages">
+    <span class="unread-messages" v-if="!save">
         {{messagesUnread}}
     </span>
-    <span class="icon">
+    <span class="icon" v-if="!save">
       <i class="nav-icon fas fa-comment fa-2x"></i>
+    </span>
+    <span v-if="save" class="subtitle is-6 save-text" @click="handleSave()">
+      SAVE
     </span>
   </p>
 </template>
 
 <script>
 export default {
-  props: ['title','messagesUnread']
+  props: ['title','messagesUnread', 'save'],
+  methods: {
+    handleSave() {
+      this.$emit('save')
+    }
+  },
 }
 </script>
 
@@ -53,5 +61,8 @@ export default {
   font-size: 0.6rem;
   background-color: #f24e86;
   z-index: 5;
+}
+.save-text {
+  color: #f24e86;
 }
 </style>

@@ -30,6 +30,11 @@
             <a class="button is-fullwidth btn-forgot-pw" @click="toLogin">Already a member?</a>
         </div>
       </form>
+      <!-- <input class="input-button" type="file" accept="image/*" @change="doSomethingWithFiles($event.target.files)"> -->
+      <!-- <input type="file" accept="image/*" capture="user"> -->
+      <!-- <br> -->
+      <!-- <input class="input-button" type="file" accept="image/*" capture="capture"> -->
+      <img id="output">
       <div class="modal" :class="{'is-active':err !== ''}">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -76,6 +81,22 @@ export default {
   },
   name: "signup",
   methods: {
+    // doSomethingWithFiles(fileList) {
+    //   console.log('files')
+    //   const output = document.getElementById('output');
+    //   let file = null;
+
+    //   for (let i = 0; i < fileList.length; i++) {
+    //     if (fileList[i].type.match(/^image\//)) {
+    //       file = fileList[i];
+    //       break;
+    //     }
+    //   }
+
+    //   if (file !== null) {
+    //     output.src = URL.createObjectURL(file);
+    //   }
+    // },
     toBack() {
       this.$router.push("/");
     },

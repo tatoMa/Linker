@@ -1,4 +1,8 @@
-# Linker
+# linker
+
+## A social network mobile app with morden UI design and Firebase for backend.
+
+### [Deployed Link: https://linker-c26d5.firebaseapp.com](https://linker-c26d5.firebaseapp.com)
 
 ## Project setup
 ```
@@ -24,3 +28,6 @@ npm run test
 ```
 npm run lint
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

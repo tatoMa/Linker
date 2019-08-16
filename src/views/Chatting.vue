@@ -18,10 +18,13 @@
       </span>
     </p>
     <!-- main container for all messages -->
+      <audio id="player" controls style="height:60px; width:100%"></audio>
+
     <div class="msg-container" id="divElem">
       <template v-if="chatsList.length>0">
         <message-box v-for="(message,index) in chatsList" :key="index" :message="message"></message-box>
       </template>
+      <img id="output">
     </div>
     <div class="input-container">
       <div style="flex-grow: 8" id="input-text">
@@ -30,14 +33,16 @@
         </form>
       </div>
       <div class="input-icon">
-        <span class="icon">
+        <label for="file-input" class="icon">
           <i class="fas fa-camera-retro"></i>
-        </span>
+        </label>
+        <input id="file-input" type="file" @change="handleImageUpload($event.target.files)"/>
       </div>
       <div class="input-icon">
-        <span class="icon">
+        <label for="audio-input" class="icon">
           <i class="fas fa-microphone"></i>
-        </span>
+        </label>
+        <input id="audio-input" type="file" accept="audio/*" @change="handleAudioUpload($event)" capture>
       </div> 
     </div>
   </nav>
@@ -99,6 +104,29 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
+    },
+    handleImageUpload(fileList) {
+      console.log('files')
+      const output = document.getElementById('output');
+      let file = null;
+
+      for (let i = 0; i < fileList.length; i++) {
+        if (fileList[i].type.match(/^image\//)) {
+          file = fileList[i];
+          break;
+        }
+      }
+
+      if (file !== null) {
+        output.src = URL.createObjectURL(file);
+      }
+    },
+    handleAudioUpload (e) {
+      var player = document.getElementById('player');
+      var file = e.target.files[0];
+      console.log(file)
+      // Do something with the audio file.
+      player.src =  URL.createObjectURL(file);
     },
     async submit(){
       let inputObject = {
@@ -177,6 +205,9 @@ export default {
 }
 .input-container .input-icon {
   padding: 0px 0.8rem;
+}
+.input-icon > input {
+  display: none;
 }
 .input-container .icon {
   color: rgba(0, 0, 0, 0.3);

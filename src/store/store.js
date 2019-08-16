@@ -15,7 +15,7 @@ export default new Vuex.Store({
   },
   state: {
     currentUser: null,
-    currentUserProfileFromDB: {}
+    currentUserProfileFromDB: null
   },
   mutations: {
     setCurrentUser (state, val) {
@@ -41,9 +41,21 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    async fetchCurrentUserProfileById ({ commit, state }, id) {
+      await fb.usersCollection
+        .doc(id)
+        .get()
+        .then(res => {
+          // console.log('fetch user by id')
+          commit('setCurrentUserProfileFromDB', res.data())
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   getters: {
-    // chatsList: state => state.chatsList.reverse()
+    currentUserProfileFromDB: state => state.currentUserProfileFromDB
   }
 })
