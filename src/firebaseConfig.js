@@ -6,12 +6,12 @@ import 'firebase/auth'
 
 // firebase init goes here
 const config = {
-  apiKey: 'AIzaSyBLO3ppaSfLX1NXF7fNO4JGsYOvAxQvAi8',
+  apiKey: '',
   authDomain: 'linker-c26d5.firebaseapp.com',
   databaseURL: 'https://linker-c26d5.firebaseio.com',
   projectId: 'linker-c26d5',
   storageBucket: 'linker-c26d5.appspot.com',
-  messagingSenderId: '273668237496'
+  messagingSenderId: ''
 }
 firebase.initializeApp(config)
 
